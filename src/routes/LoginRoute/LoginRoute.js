@@ -20,7 +20,7 @@ class LoginRoute extends Component {
       <section>
         <h2>Login</h2>
         <span>
-          <i>Demo Account</i> Username: admin | Password: pass
+          <i>Demo Account:</i> Username: admin | Password: pass
         </span>
         <LoginForm onLoginSuccess={this.handleLoginSuccess} />
       </section>
