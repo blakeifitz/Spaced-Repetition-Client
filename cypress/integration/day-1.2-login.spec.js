@@ -146,7 +146,7 @@ describe(`User story: Login`, function () {
       }).as('languageRequest');
     });
 
-    it(`stores token in sessionStorage and redirects to /`, () => {
+    it(`stores token in localStorage and redirects to /`, () => {
       const loginUser = {
         username: 'username',
         password: 'password',
@@ -161,7 +161,7 @@ describe(`User story: Login`, function () {
         cy.wait('@loginRequest')
           .window()
           .then((win) => {
-            const tokenInStorage = win.sessionStorage.getItem(
+            const tokenInStorage = win.localStorage.getItem(
               Cypress.env('TOKEN_KEY')
             );
             expect(tokenInStorage).to.eql(loginToken);
@@ -187,7 +187,7 @@ describe(`User story: Login`, function () {
           .should('eq', `${Cypress.config().baseUrl}/login`);
 
         cy.window().then((win) => {
-          const tokenInStorage = win.sessionStorage.getItem(
+          const tokenInStorage = win.localStorage.getItem(
             Cypress.env('TOKEN_KEY')
           );
           expect(tokenInStorage).to.not.exist;
@@ -202,7 +202,7 @@ describe(`User story: Login`, function () {
       };
       cy.clock().visit('/login');
 
-      // cy.login() uses sessionStorage directly. So...
+      // cy.login() uses localStorage directly. So...
       // need to ensure the refresh login still applies after using login form
       cy.get('main form').within(($form) => {
         cy.get('#login-username-input').type(loginUser.username);
@@ -217,13 +217,13 @@ describe(`User story: Login`, function () {
       });
     });
 
-    it(`refreshes tokens loaded from sessionStorage`, () => {
+    it(`refreshes tokens loaded from localStorage`, () => {
       cy.login().clock().visit('/');
       cy.tick(20000).wait('@refreshRequest');
       cy.tick(20000).wait('@refreshRequest');
     });
 
-    it(`doesn't redirect on page load when valid token in sessionStorage`, () => {
+    it(`doesn't redirect on page load when valid token in localStorage`, () => {
       cy.login()
         .visit('/')
         .url()
