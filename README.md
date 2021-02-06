@@ -1,5 +1,8 @@
 # Spaced Repetition
 
+API Repo: https://github.com/blakeifitz/spaced-repetition-api
+Live App: https://spaced-repetition-client-phi.vercel.app/login
+
 This app was created to demonstrate spaced repetition style learning. I chose French as an example.
 
 The more often you get a word correct the less often the user will see it. The more often you get it incorrect the more you will see that word.
