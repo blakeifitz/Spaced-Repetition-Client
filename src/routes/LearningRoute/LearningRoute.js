@@ -34,8 +34,8 @@ class LearningRoute extends Component {
         next: data.next,
         original: data.next,
         score: data.totalScore,
-        incorrect: data.wordIncorrectCount,
-        correct: data.wordCorrectCount,
+        incorrectCount: data.wordIncorrectCount,
+        correctCount: data.wordCorrectCount,
         showResults: false,
       });
     });
@@ -54,7 +54,8 @@ class LearningRoute extends Component {
 
   handleGuess = (e) => {
     e.preventDefault();
-    let guess = e.target['learn-guess-input'].value;
+    let guess = e.target['learn-guess-input'].value.trim();
+    guess = guess.charAt(0).toUpperCase() + guess.slice(1);
     this.setState({
       guess,
     });
@@ -62,8 +63,8 @@ class LearningRoute extends Component {
       this.setState({
         next: data.next,
         score: data.totalScore,
-        incorrect: data.wordIncorrectCount,
-        correct: data.wordCorrectCount,
+        incorrectCount: data.wordIncorrectCount,
+        correctCount: data.wordCorrectCount,
         isCorrect: data.isCorrect,
         showResults: true,
         translation: data.answer,
