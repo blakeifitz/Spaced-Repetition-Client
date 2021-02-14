@@ -3,14 +3,16 @@ import RegistrationForm from '../../components/RegistrationForm/RegistrationForm
 
 class RegistrationRoute extends Component {
   static defaultProps = {
+    location: {},
     history: {
       push: () => {},
     },
   };
 
-  handleRegistrationSuccess = () => {
-    const { history } = this.props;
-    history.push('/');
+  handleLoginSuccess = () => {
+    const { location, history } = this.props;
+    const destination = (location.state || {}).from || '/';
+    history.push(destination);
   };
 
   render() {

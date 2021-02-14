@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Input, Required, Label } from '../Form/Form';
 import AuthApiService from '../../services/auth-api-service';
+import UserContext from '../../contexts/UserContext';
 import Button from '../Button/Button';
 import './RegistrationForm.css';
 
@@ -9,6 +10,7 @@ class RegistrationForm extends Component {
   static defaultProps = {
     onRegistrationSuccess: () => {},
   };
+  static contextType = UserContext;
 
   state = { error: null };
 
@@ -26,6 +28,7 @@ class RegistrationForm extends Component {
         name.value = '';
         username.value = '';
         password.value = '';
+        this.context.processLogin(user.authToken);
         this.props.onRegistrationSuccess();
       })
       .catch((res) => {
